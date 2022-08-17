@@ -14,7 +14,7 @@ import {
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 
-import { CarDetails } from './src/screens/CarDetails';
+import { Scheduling } from './src/screens/Scheduling';
 
 import theme from './src/styles/theme';
 
@@ -62,7 +62,7 @@ export default function App() {
           flex: 1
         }}  
       >
-        <CarDetails />
+        <Scheduling />
       </View>
     </ThemeProvider>
   );

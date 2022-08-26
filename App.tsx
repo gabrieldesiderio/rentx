@@ -1,24 +1,22 @@
-import React, { useCallback, useEffect, useState} from 'react';
-import { ThemeProvider } from 'styled-components'
+import React, { useCallback, useEffect, useState } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { ThemeProvider } from "styled-components";
 
-import {
-  Inter_400Regular,
-  Inter_500Medium
-} from '@expo-google-fonts/inter';
+import { Inter_400Regular, Inter_500Medium } from "@expo-google-fonts/inter";
 import {
   Archivo_400Regular,
   Archivo_500Medium,
-  Archivo_600SemiBold
-} from '@expo-google-fonts/archivo';
+  Archivo_600SemiBold,
+} from "@expo-google-fonts/archivo";
 
-import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 
-import { SchedulingDetails } from './src/screens/SchedulingDetails';
+import { Routes } from "./src/routes";
 
-import theme from './src/styles/theme';
+import theme from "./src/styles/theme";
 
-import { View } from 'react-native';
+import { View } from "react-native";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -32,8 +30,8 @@ export default function App() {
           Inter_500Medium,
           Archivo_400Regular,
           Archivo_500Medium,
-          Archivo_600SemiBold
-        })
+          Archivo_600SemiBold,
+        });
       } catch (e) {
         console.warn(e);
       } finally {
@@ -45,25 +43,27 @@ export default function App() {
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
-    if(appIsReady) {
+    if (appIsReady) {
       await SplashScreen.hideAsync();
     }
   }, [appIsReady]);
 
-  if(!appIsReady) {
+  if (!appIsReady) {
     return null;
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <View
-        onLayout={onLayoutRootView}
-        style={{
-          flex: 1
-        }}  
-      >
-        <SchedulingDetails />
-      </View>
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider theme={theme}>
+        <View
+          onLayout={onLayoutRootView}
+          style={{
+            flex: 1,
+          }}
+        >
+          <Routes />
+        </View>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }

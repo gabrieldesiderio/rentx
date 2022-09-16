@@ -9,7 +9,7 @@ import { ImageSlider } from "../../components/ImageSlider";
 import { Accessory } from "../../components/Accessory";
 import { Button } from "../../components/Button";
 
-import speedSvg, { getAccessoryIcon } from '../../utils/getAccessoryIcon';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 
 import { 
   Container, 
@@ -38,7 +38,7 @@ export function CarDetails() {
   const { car } = route.params as Params;
 
   function handleConfirmRental() {
-    navigation.navigate('Scheduling');
+    navigation.navigate('Scheduling', { car });
   }
 
   function handleBack() {

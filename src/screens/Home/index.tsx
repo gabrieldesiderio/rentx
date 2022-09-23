@@ -19,7 +19,7 @@ import { api } from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
 
 import { Car } from "../../components/Car";
-import { Load } from "../../components/Load";
+import { LoadAnimation } from "../../components/LoadAnimation";
 
 import { Container, Header, HeaderContent, TotalCars, CarList } from "./styles";
 import { useTheme } from "styled-components";
@@ -100,7 +100,7 @@ export function Home() {
       </Header>
 
       {loading ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <CarList
           data={cars}

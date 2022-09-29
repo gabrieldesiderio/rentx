@@ -11,6 +11,7 @@ export const Container = styled.View<ContainerProps>`
   flex-direction: row;
   background-color: ${({ theme }) => theme.colors.background_secondary};
   height: 56px;
+  margin-bottom: 8px;
 
   ${({ isFocused, theme }) => isFocused && css`
     border-bottom-width: 2px;

@@ -9,6 +9,8 @@ import { SchedulingDetails } from "../screens/SchedulingDetails";
 import { MyCars } from "../screens/MyCars";
 import { Splash } from "../screens/Splash";
 import { SignIn } from "../screens/SignIn";
+import { SignUpFirstStep } from "../screens/SignUp/SignUpFirstStep";
+import { SignUpSecondStep } from "../screens/SignUp/SignUpSecondStep";
 
 type RootStackParamList = {
   Home: undefined;
@@ -19,6 +21,8 @@ type RootStackParamList = {
   myCars: undefined;
   Splash: undefined;
   SignIn: undefined;
+  SignUpFirstStep: undefined;
+  SignUpSecondStep: undefined;
 }
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
@@ -27,6 +31,8 @@ export function StackRoutes() {
   return (
     <Navigator screenOptions={{ headerShown: false }} initialRouteName="SignIn">
       <Screen name="SignIn" component={SignIn} />
+      <Screen name="SignUpFirstStep" component={SignUpFirstStep} />
+      <Screen name="SignUpSecondStep" component={SignUpSecondStep} />
       <Screen name="Splash" component={Splash} />
       <Screen name="Home" component={Home} options={{ gestureEnabled: false }} />
       <Screen name="CarDetails" component={CarDetails} />

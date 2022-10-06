@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ThemeProvider } from "styled-components";
 
+import { AppProvider } from "./src/hooks";
+
 import { Inter_400Regular, Inter_500Medium } from "@expo-google-fonts/inter";
 import {
   Archivo_400Regular,
@@ -55,14 +57,16 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
-        <View
-          onLayout={onLayoutRootView}
-          style={{
-            flex: 1,
-          }}
-        >
-          <Routes />
-        </View>
+        <AppProvider>
+          <View
+            onLayout={onLayoutRootView}
+            style={{
+              flex: 1,
+            }}
+          >
+            <Routes />
+          </View>
+        </AppProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
   );

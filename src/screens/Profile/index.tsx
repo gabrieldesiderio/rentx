@@ -4,6 +4,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import * as ImagePicker from 'expo-image-picker'
 
 import { useAuth } from "../../hooks/auth";
 import { useTheme } from "styled-components";
@@ -20,10 +21,13 @@ import { PasswordInput } from "../../components/PasswordInput";
 import * as S from "./styles";
 
 export function Profile() {
-  const [option, setOption] = useState<"dataEdit" | "passwordEdit">("dataEdit");
-  
   const { user } = useAuth();
 
+  const [option, setOption] = useState<"dataEdit" | "passwordEdit">("dataEdit");
+  const [avatar, setAvatar] = useState(user.avatar);
+  const [name, setName] = useState(user.name);
+  const [driverLicense, setDriverLicense] = useState(user.driver_license);
+  
   const theme = useTheme();
   const navigation = useNavigation();
 
@@ -35,6 +39,23 @@ export function Profile() {
 
   function handleOptionChange(optionSelected: "dataEdit" | "passwordEdit") {
     setOption(optionSelected);
+  }
+
+  async function handleAvatarSelect() {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+    });
+
+    if(result.cancelled) {
+      return;
+    }
+
+    if(result.uri) {
+      setAvatar(result.uri)
+    }
   }
 
   return (
@@ -50,12 +71,8 @@ export function Profile() {
               </S.LogoutButton>
             </S.HeaderTop>
             <S.PhotoContainer>
-              <S.Photo
-                source={{
-                  uri: "https://avatars.githubusercontent.com/u/46680137?v=4",
-                }}
-              />
-              <S.PhotoButton onPress={() => {}}>
+              { !!avatar && <S.Photo source={{ uri: avatar }} /> }
+              <S.PhotoButton onPress={handleAvatarSelect}>
                 <Feather name="camera" size={24} color={theme.colors.shape} />
               </S.PhotoButton>
             </S.PhotoContainer>
@@ -86,6 +103,7 @@ export function Profile() {
                   placeholder="Nome" 
                   autoCorrect={false} 
                   defaultValue={user.name}
+                  onChangeText={setName}
                 />
                 <Input 
                   iconName="mail" 
@@ -97,6 +115,7 @@ export function Profile() {
                   placeholder="CNH"
                   keyboardType="numeric"
                   defaultValue={user.driver_license}
+                  onChangeText={setDriverLicense}
                 />
               </S.Section>
             ) : (

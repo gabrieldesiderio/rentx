@@ -28,7 +28,7 @@ export const HeaderTop = styled.View`
 `;
 
 export const HeaderTitle = styled.Text`
-  font-size: ${RFValue(32)}px;
+  font-size: ${RFValue(26)}px;
   font-family: ${({ theme }) => theme.fonts.secondary_600};
   color: ${({ theme }) => theme.colors.background_secondary};
 `;
